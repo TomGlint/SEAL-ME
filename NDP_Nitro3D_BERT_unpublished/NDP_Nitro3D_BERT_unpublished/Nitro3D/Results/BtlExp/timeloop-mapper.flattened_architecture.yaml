@@ -1,0 +1,83 @@
+architecture:
+  version: 0.3
+  local:
+  - name: System.ws.PE.PEInputBuffer[0..7]
+    class: storage
+    subclass: smartbuffer_SRAM
+    attributes:
+      cluster-size: 1
+      datawidth: 8
+      latency: 1ns
+      memory_depth: 512
+      memory_width: 128
+      meshX: 8
+      n_banks: 1
+      n_buffets: 1
+      n_rdwr_ports: 2
+      technology: 45nm
+      word-bits: 8
+  - name: System.ws.PE.PEWeightBuffer[0..7]
+    class: storage
+    subclass: smartbuffer_SRAM
+    attributes:
+      cluster-size: 1
+      datawidth: 8
+      latency: 1ns
+      memory_depth: 512
+      memory_width: 128
+      meshX: 8
+      n_banks: 1
+      n_buffets: 1
+      n_rdwr_ports: 2
+      technology: 45nm
+      word-bits: 8
+  - name: System.ws.PE.PEAccuBuffer[0..63]
+    class: storage
+    subclass: smartbuffer_SRAM
+    attributes:
+      cluster-size: 1
+      datawidth: 8
+      latency: 1ns
+      memory_depth: 64
+      memory_width: 32
+      meshX: 8
+      n_banks: 1
+      n_buffets: 1
+      n_rdwr_ports: 2
+      technology: 45nm
+      word-bits: 8
+  - name: System.ws.PE.LMAC[0..1023]
+    class: compute
+    subclass: lmac
+    attributes:
+      datawidth: 8
+      latency: 1ns
+      meshX: 8
+      technology: 45nm
+      word-bits: 8
+  - name: System.ws.GlobalBuffer
+    class: storage
+    subclass: smartbuffer_SRAM
+    attributes:
+      cluster-size: 1
+      datawidth: 8
+      latency: 1ns
+      memory_depth: 2048
+      memory_width: 256
+      meshX: 1
+      n_banks: 1
+      n_buffets: 1
+      n_rdwr_ports: 2
+      nports: 2
+      technology: 45nm
+      word-bits: 8
+  - name: System.DRAM
+    class: DRAM
+    attributes:
+      block-size: 1
+      datawidth: 8
+      latency: 1ns
+      technology: 45nm
+      type: HMB3
+      width: 8
+      word-bits: 8

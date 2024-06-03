@@ -1,0 +1,73 @@
+mapping:
+  - target: PEAccuBuffer
+    type: datatype
+    keep:
+      - Z
+    bypass:
+      - A
+      - B
+  - target: PEWeightBuffer
+    type: datatype
+    keep:
+      - B
+    bypass:
+      - A
+      - Z
+  - target: PEInputBuffer
+    type: datatype
+    keep:
+      - A
+    bypass:
+      - B
+      - Z
+  - target: GlobalBuffer
+    type: datatype
+    keep:
+      []
+    bypass:
+      - A
+      - B
+      - Z
+  - target: DRAM
+    type: datatype
+    keep:
+      - A
+      - B
+      - Z
+    bypass:
+      []
+  - target: PEAccuBuffer
+    type: spatial
+    factors: M1 N1 K16
+    permutation: KMN
+    split: 0
+  - target: PEAccuBuffer
+    type: temporal
+    factors: M16 N1 K8
+    permutation: KMN
+  - target: PEWeightBuffer
+    type: spatial
+    factors: M2 N2 K2
+    permutation: MNK
+    split: 0
+  - target: PEWeightBuffer
+    type: temporal
+    factors: M1 N4 K1
+    permutation: NMK
+  - target: PEInputBuffer
+    type: temporal
+    factors: M1 N1 K1
+    permutation: MNK
+  - target: GlobalBuffer
+    type: spatial
+    factors: M8 N1 K1
+    permutation: MNK
+    split: 1
+  - target: GlobalBuffer
+    type: temporal
+    factors: M2 N4 K1
+    permutation: NMK
+  - target: DRAM
+    type: temporal
+    factors: M2 N2 K4
+    permutation: NKM

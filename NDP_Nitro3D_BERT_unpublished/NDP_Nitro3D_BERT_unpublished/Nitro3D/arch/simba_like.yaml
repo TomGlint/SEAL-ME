@@ -1,0 +1,78 @@
+architecture:
+  version: 0.3
+  subtree:
+    - name: System
+      attributes:
+        datawidth: 8
+        word-bits: 8
+        technology: 45nm
+        latency: 1ns
+      local:
+        - name: DRAM
+          class: DRAM
+          attributes:
+            type: HMB3
+            width: 8
+            block-size: 1
+            word-bits: 8
+      subtree:
+        - name: ws
+          local:
+            - name: GlobalBuffer
+              class: storage
+              subclass: smartbuffer_SRAM
+              attributes:
+                memory_depth: 2048
+                memory_width: 256
+                word-bits: 8
+                cluster-size: 1
+                nports: 2
+                meshX: 1
+          subtree:
+            - name: PE
+              local:
+                - name: PEInputBuffer[0..7]
+                  class: storage
+                  subclass: smartbuffer_SRAM
+                  attributes:
+                    memory_depth: 512
+                    memory_width: 128
+                    word-bits: 8
+                    cluster-size: 1
+                    meshX: 8
+                - name: PEWeightBuffer[0..7]
+                  class: storage
+                  subclass: smartbuffer_SRAM
+                  attributes:
+                    memory_depth: 512
+                    memory_width: 128
+                    word-bits: 8
+                    meshX: 8
+                    cluster-size: 1
+                    n_banks: 1
+                - name: PEAccuBuffer[0..63]
+                  class: storage
+                  subclass: smartbuffer_SRAM
+                  attributes:
+                    memory_depth: 64
+                    memory_width: 32
+                    cluster-size: 1
+                    word-bits: 8
+                    meshX: 8
+                # - name: PEWeightRegs[0..1023]
+                #   class: storage
+                #   subclass: smartbuffer_SRAM
+                #   attributes:
+                #     memory_depth: 1
+                #     memory_width: 16
+                #     word-bits: 8
+                #     cluster-size: 1
+                #     num-ports: 2
+                #     meshX: 1
+                - name: LMAC[0..1023]
+                  class: compute
+                  subclass: lmac
+                  attributes:
+                    latency: 1ns
+                    datawidth: 8
+                    meshX: 8

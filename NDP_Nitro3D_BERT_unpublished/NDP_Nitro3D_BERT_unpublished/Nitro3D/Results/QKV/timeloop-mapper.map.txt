@@ -1,0 +1,30 @@
+
+DRAM [ A:1048576 (1048576) B:65536 (65536) Z:65536 (65536) ] 
+------------------------------------------------------------
+| for M in [0:2)
+|   for K in [0:4)
+|     for N in [0:2)
+
+GlobalBuffer [ ] 
+----------------
+|       for M in [0:2)
+|         for N in [0:4)
+|           for M in [0:8) (Spatial-X)
+
+PEInputBuffer [ A:8192 (8192) ] 
+-------------------------------
+|             for K in [0:1)
+
+PEWeightBuffer [ B:2048 (2048) ] 
+--------------------------------
+|               for N in [0:4)
+|                 for K in [0:2) (Spatial-Y)
+|                   for N in [0:2) (Spatial-Y)
+|                     for M in [0:2) (Spatial-Y)
+
+PEAccuBuffer [ Z:16 (16) ] 
+--------------------------
+|                       for M in [0:16)
+|                         for K in [0:8)
+|                           for K in [0:16) (Spatial-Y)
+
